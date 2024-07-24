@@ -2,12 +2,17 @@
 #define BOARD_HPP
 
 #include <iosfwd>
+#include <vector>
+#include <ranges>
+#include <cstdlib>
+#include <ctime>
 
 class Board {
     
     // Implemented Tile as a private class within Board since it is exclusively used by Board
     // Board acts as a medium through which the main program can access the Tiles stored in here
     struct Tile {
+        Tile();
         void increment_num();
         bool reveal();
         void flag();
@@ -25,7 +30,8 @@ class Board {
 
     int width;
     int height;
-    int num_mines;
+    int num_revealed;
+    std::vector<std::vector<Tile>> _board;
     
     friend std::ostream &operator>>(std::ostream &out, const Board::Tile &tile);
 
@@ -44,6 +50,6 @@ class Board {
 
 std::ostream &operator>>(std::ostream &out, const Board &board);
 
-
+int get_random(int min, int max);
 
 #endif
